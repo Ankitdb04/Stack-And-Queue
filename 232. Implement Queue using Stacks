@@ -1,0 +1,38 @@
+import java.util.Stack; // Don't forget to import Stack
+
+class MyQueue {
+    Stack <Integer> s1; // This stack will hold elements in queue order
+    Stack <Integer> s2; // This auxiliary stack helps reverse order for push
+
+    public MyQueue() {
+        s1 = new Stack<>();
+        s2 = new Stack<>();
+    }
+    
+    public void push(int x) {
+        // Move all elements from s1 to s2
+        while (!s1.empty()) { // Correctly move all elements
+            s2.push(s1.pop());
+        }
+        
+        // Push the new element onto s1
+        s1.push(x);
+        
+        // Move all elements back from s2 to s1
+        while (!s2.empty()) { // Correctly move all elements back
+            s1.push(s2.pop());
+        }
+    }
+    
+    public int pop() {
+        return s1.pop();
+    }
+    
+    public int peek() {
+        return s1.peek(); // Corrected method call
+    }
+    
+    public boolean empty() {
+        return s1.empty(); // More concise way to check if stack is empty
+    }
+}
